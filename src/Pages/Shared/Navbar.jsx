@@ -1,6 +1,17 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+  
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   return (
     <nav className="bg-sky-800 text-white p-6 sticky top-0 z-10 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
@@ -51,7 +62,23 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        <button className="btn btn-primary">Login</button>
+
+        {user ? (
+        <>
+          {" "}
+          <span>{user?.displayName}</span>
+          <button onClick={handleLogOut} className="btn btn-ghost">
+            LogOut
+          </button>
+        </>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
       </div>
     </nav>
   );
