@@ -14,7 +14,7 @@ const Navbar = () => {
             />
           </div>
           <div>
-            <h2 className="font-bold text-purple-600">E-Learning</h2>
+            <h2 className="font-bold text-purple-600 text-2xl">E-Learning</h2>
           </div>
         </div>
 
