@@ -1,21 +1,23 @@
-// src/components/Navbar.jsx
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 text-white p-6 ">
+    <nav className="bg-sky-800 text-white p-6 sticky top-0 z-10 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         
-      <div className="flex items-center gap-2">
-        <div >
-        <img className="h-12 w-12 object-cover" src="https://img.freepik.com/premium-vector/e-learning-concept_24911-16717.jpg" alt="" />
-        </div>
-        <div>
+        <div className="flex items-center gap-2">
+          <div>
+            <img
+              className="h-12 w-12 object-cover"
+              src="https://img.freepik.com/premium-vector/e-learning-concept_24911-16717.jpg"
+              alt="Logo"
+            />
+          </div>
+          <div>
             <h2 className="font-bold text-purple-600">E-Learning</h2>
+          </div>
         </div>
-      </div>
 
-        
         <div className="flex gap-6">
           <NavLink
             to="/"
@@ -28,7 +30,7 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to=""
+            to="/classes"
             className={({ isActive }) =>
               isActive
                 ? "text-blue-500 font-bold border-b-2 border-blue-500 pb-1"
@@ -38,7 +40,7 @@ const Navbar = () => {
             All Classes
           </NavLink>
           <NavLink
-            to=""
+            to="/teach"
             className={({ isActive }) =>
               isActive
                 ? "text-blue-500 font-bold border-b-2 border-blue-500 pb-1"
@@ -47,13 +49,9 @@ const Navbar = () => {
           >
             Teach
           </NavLink>
-          
         </div>
 
-        
-        <button  className="btn btn-primary">
-          Login
-        </button>
+        <button className="btn btn-primary">Login</button>
       </div>
     </nav>
   );
