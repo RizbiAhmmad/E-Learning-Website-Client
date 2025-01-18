@@ -2,23 +2,46 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Teach = () => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
+  const axiosSecure = useAxiosSecure();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    
+    data.status = "pending";
 
-    // Handle form submission here, e.g., send data to the server
-    Swal.fire({
-      title: "Application Submitted!",
-      text: "Your application is under review.",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
+    try {
+      const response = await axiosSecure.post("/teach-application", data);
+      console.log("Application submitted:", response.data);
+      if (response.data.insertedId) {
+        Swal.fire({
+          title: "Application Submitted!",
+          text: "Your application is under review.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
 
-    reset();
+        reset(); 
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: response.data.message || "Failed to submit the application.",
+          icon: "error",
+          confirmButtonText: "Try Again",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "An unexpected error occurred. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (

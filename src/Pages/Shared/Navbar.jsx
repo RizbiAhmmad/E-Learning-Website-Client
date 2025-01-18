@@ -85,15 +85,17 @@ const Navbar = () => {
                 className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-40"
                 onMouseLeave={closeDropdown}
               >
-                <Link
-                  to="/dashboard"
-                  className="block px-4 py-2 hover:bg-gray-200"
-                >
-                  Dashboard
+                <p className="block px-4 py-2 font-semibold border-b border-gray-200">
+                  {user.displayName || "User"}
+                </p>
+                <Link to="/dashboard">
+                  <button className="w-full text-left px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded">
+                    Dashboard
+                  </button>
                 </Link>
                 <button
                   onClick={handleLogOut}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                  className="w-full mt-2 px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded"
                 >
                   Logout
                 </button>

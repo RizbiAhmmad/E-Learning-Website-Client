@@ -6,6 +6,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Authentication/Login";
 import SignUp from "../Pages/Authentication/SignUp";
 import Teach from "../Pages/Teach";
+import PrivateRoute from "./PrivateRoute";
 
 export  const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ export  const router = createBrowserRouter([
         },
         {
           path: 'teach',
-          element: <Teach></Teach>
+          element: <PrivateRoute> <Teach></Teach> </PrivateRoute>
 
         }
       ]
