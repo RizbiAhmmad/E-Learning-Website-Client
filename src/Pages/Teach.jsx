@@ -12,6 +12,7 @@ const Teach = () => {
   const onSubmit = async (data) => {
     
     data.status = "pending";
+    data.photoURL = user?.photoURL;
 
     try {
       const response = await axiosSecure.post("/teach-application", data);

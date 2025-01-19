@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
+import TeachApplications from "../Pages/Dashboard/TeacherRequest/TeachApplication";
 
 export  const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export  const router = createBrowserRouter([
         {
           path: 'users',
           element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
+        {
+          path: 'requests',
+          element: <TeachApplications></TeachApplications>
         }
       ]
     }
