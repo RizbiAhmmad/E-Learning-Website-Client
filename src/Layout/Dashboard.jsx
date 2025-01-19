@@ -10,7 +10,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
-  const {isAdmin}= useAdmin();
+  const [isAdmin]= useAdmin();
   
   return (
     <div className="flex">
@@ -44,11 +44,16 @@ const Dashboard = () => {
                   <CgProfile></CgProfile> Profile
                 </NavLink>
               </li>
+            
             </>
-          ) : (
+            )
+           : (
             <>
+             
+            
             </>
-          )}
+            )
+          }
         </ul>
       </div>
       <div className="flex-1">

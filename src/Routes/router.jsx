@@ -9,6 +9,7 @@ import Teach from "../Pages/Teach";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 export  const router = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ export  const router = createBrowserRouter([
         // ADMIN ROUTES
         {
           path: 'users',
-          element:<AllUsers></AllUsers>
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
         }
       ]
     }
