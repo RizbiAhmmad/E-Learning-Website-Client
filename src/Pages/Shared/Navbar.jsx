@@ -82,7 +82,7 @@ const Navbar = () => {
             />
             {dropdownOpen && (
               <div
-                className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-40"
+                className="absolute right-0 p-2 mt-2  bg-white text-black rounded shadow-lg w-40"
                 onMouseLeave={closeDropdown}
               >
                 <p className="block px-4 py-2 font-semibold border-b border-gray-200">

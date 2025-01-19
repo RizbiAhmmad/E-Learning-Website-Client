@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -10,6 +11,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider()
+  const axiosPublic = useAxiosPublic()
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -38,15 +40,30 @@ const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      setUser(currentuser);
-      console.log("current user", currentuser);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("Auth State Changed:", currentUser); 
+      setUser(currentUser);
+  
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            // console.log("JWT Token Received:", res.data.token); 
+            if (res.data.token) {
+              localStorage.setItem('access-token', res.data.token);
+            }
+          })
+          .catch(error => console.error("Error fetching token:", error))
+          .finally(() => setLoading(false));
+      } else {
+        localStorage.removeItem('access-token');
+        setLoading(false);
+      }
     });
-    return () => {
-      return unsubscribe();
-    };
-  }, []);
+  
+    return () => unsubscribe();
+  }, [axiosPublic]);
+  
 
   const authInfo = {
     user,
