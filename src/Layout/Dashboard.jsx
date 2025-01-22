@@ -12,9 +12,9 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Dashboard = () => {
-  const [isAdmin]= useAdmin();
-  const {user} = useAuth()
-  const axiosPublic = useAxiosPublic()
+  const [isAdmin] = useAdmin();
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Dashboard = () => {
         .catch((error) => console.error("Error fetching user role:", error));
     }
   }, [axiosPublic, user]);
-  
+
   return (
     <div className="flex">
       {/* Dashboard side bar */}
@@ -64,23 +64,36 @@ const Dashboard = () => {
                   <CgProfile></CgProfile> Profile
                 </NavLink>
               </li>
-            
             </>
-            )
-           : (
-            <>
-             
-            
-            </>
-            )
-          }
+          ) : (
+            <></>
+          )}
 
-          {
-            userRole === 'user' && (
-              <div className="text-sm text-gray-400">
-                Current User Role: {userRole}
+          {userRole === "teacher" && (
+            <div className="">
+              Current User Role: {userRole}
+              <li>
+                <NavLink to="/dashboard/add-class">
+                  <FaChalkboardTeacher /> Add Class
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/my-classes">
+                  <FaBookOpen /> My Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/profile">
+                  <CgProfile /> Profile
+                </NavLink>
+              </li>
+            </div>
+          )}
 
-                <li>
+          {userRole === "user" && (
+            <div className="">
+              Current User Role: {userRole}
+              <li>
                 <NavLink to="/">
                   <FaHome></FaHome> Home
                 </NavLink>
@@ -90,12 +103,8 @@ const Dashboard = () => {
                   <CgProfile></CgProfile> Profile
                 </NavLink>
               </li>
-
-              </div>
-            )
-
-          
-          }
+            </div>
+          )}
         </ul>
       </div>
       <div className="flex-1">
