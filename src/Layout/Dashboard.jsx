@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import {
   FaBookOpen,
@@ -8,9 +8,29 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
+import useAuth from "../Hooks/useAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Dashboard = () => {
   const [isAdmin]= useAdmin();
+  const {user} = useAuth()
+  const axiosPublic = useAxiosPublic()
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    if (user && user.email) {
+      // Ensure `user` is not null
+      const userEmail = user?.email;
+      console.log(userEmail);
+      axiosPublic
+        .get("/users/role", { params: { email: userEmail } })
+        .then((response) => {
+          setUserRole(response.data.role); // Update the state with the role
+          console.log("User Role:", response.data.role);
+        })
+        .catch((error) => console.error("Error fetching user role:", error));
+    }
+  }, [axiosPublic, user]);
   
   return (
     <div className="flex">
@@ -53,6 +73,28 @@ const Dashboard = () => {
             
             </>
             )
+          }
+
+          {
+            userRole === 'user' && (
+              <div className="text-sm text-gray-400">
+                Current User Role: {userRole}
+
+                <li>
+                <NavLink to="/">
+                  <FaHome></FaHome> Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/profile">
+                  <CgProfile></CgProfile> Profile
+                </NavLink>
+              </li>
+
+              </div>
+            )
+
+          
           }
         </ul>
       </div>

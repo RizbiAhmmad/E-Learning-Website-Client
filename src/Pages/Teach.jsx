@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
@@ -8,15 +8,34 @@ const Teach = () => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
+  const [role, setRole] = useState(null);
+
+  // Fetch user role on component mount
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const response = await axiosSecure.get(`/users/role?email=${user?.email}`);
+        setRole(response.data.role || "user");
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+        setRole("user");
+      }
+    };
+
+    if (user?.email) {
+      fetchUserRole();
+    }
+  }, [user, axiosSecure]);
 
   const onSubmit = async (data) => {
-    
     data.status = "pending";
     data.photoURL = user?.photoURL;
+    data.role = role; // Include the role
 
     try {
       const response = await axiosSecure.post("/teach-application", data);
       console.log("Application submitted:", response.data);
+
       if (response.data.insertedId) {
         Swal.fire({
           title: "Application Submitted!",
@@ -25,7 +44,7 @@ const Teach = () => {
           confirmButtonText: "OK",
         });
 
-        reset(); 
+        reset();
       } else {
         Swal.fire({
           title: "Error!",
@@ -80,6 +99,17 @@ const Teach = () => {
             type="email"
             defaultValue={user?.email || ""}
             {...register("email", { required: true })}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            readOnly
+          />
+        </div>
+
+        {/* Role Field */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">Role</label>
+          <input
+            type="text"
+            value={role || "Loading..."}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
             readOnly
           />

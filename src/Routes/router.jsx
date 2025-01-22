@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import TeachApplications from "../Pages/Dashboard/TeacherRequest/TeachApplication";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 
 export  const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export  const router = createBrowserRouter([
         {
           path: 'requests',
           element: <TeachApplications></TeachApplications>
+        },
+        {
+          path: 'profile',
+          element: <Profile></Profile>
         }
       ]
     }

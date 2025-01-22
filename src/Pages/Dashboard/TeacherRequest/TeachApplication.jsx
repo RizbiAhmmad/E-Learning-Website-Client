@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const TeacherRequests = () => {
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
 
   // Fetch teacher applications
   const { data: applications = [], refetch } = useQuery({
@@ -15,39 +16,47 @@ const TeacherRequests = () => {
   });
 
   // Approve Teacher Application
-  const handleApprove = (application) => {
-    axiosSecure
-      .patch(`/teach-applications/approve/${application._id}`)
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${application.name} has been approved as a teacher!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+  const handleMakeTeacher = async (application) => {
+    try {
+      const res = await axiosSecure.patch(`/teach-applications/approve/${application._id}`);
+      if (res.data.applicationUpdate.modifiedCount > 0) {
+        // Invalidate cache to ensure fresh data
+        queryClient.invalidateQueries("teacherRequests");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${application.name} has been approved as a teacher!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        console.error("No data modified in the backend.");
+      }
+    } catch (error) {
+      console.error("Error approving teacher:", error);
+    }
   };
 
   // Reject Teacher Application
-  const handleReject = (application) => {
-    axiosSecure
-      .patch(`/teach-applications/reject/${application._id}`)
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${application.name}'s request has been rejected.`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+  const handleReject = async (application) => {
+    try {
+      const res = await axiosSecure.patch(`/teach-applications/reject/${application._id}`);
+      if (res.data.modifiedCount > 0) {
+        // Invalidate cache to ensure fresh data
+        queryClient.invalidateQueries("teacherRequests");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${application.name}'s request has been rejected.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        console.error("No data modified in the backend.");
+      }
+    } catch (error) {
+      console.error("Error rejecting teacher:", error);
+    }
   };
 
   return (
@@ -86,7 +95,7 @@ const TeacherRequests = () => {
                 <td>{application.category}</td>
                 <td
                   className={`font-bold ${
-                    application.status === "Pending"
+                    application.status === "pending"
                       ? "text-yellow-500"
                       : application.status === "Accepted"
                       ? "text-green-500"
@@ -97,16 +106,16 @@ const TeacherRequests = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleApprove(application)}
-                    className="btn btn-sm bg-green-500 text-white mr-2"
-                    disabled={application.status !== "Pending"}
+                    onClick={() => handleMakeTeacher(application)}
+                    className="btn btn-sm bg-green-500 text-white mr-2 hover:bg-green-600"
+                    disabled={application.status !== "pending"}
                   >
                     Approve
                   </button>
                   <button
                     onClick={() => handleReject(application)}
-                    className="btn btn-sm bg-red-500 text-white"
-                    disabled={application.status !== "Pending"}
+                    className="btn btn-sm bg-red-500 text-white hover:bg-red-600"
+                    disabled={application.status !== "pending"}
                   >
                     Reject
                   </button>

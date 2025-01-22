@@ -41,17 +41,20 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("Auth State Changed:", currentUser); 
+      // console.log("Auth State Changed:", currentUser); 
       setUser(currentUser);
   
       if (currentUser) {
         const userInfo = { email: currentUser.email };
+
         axiosPublic.post('/jwt', userInfo)
           .then(res => {
             // console.log("JWT Token Received:", res.data.token); 
             if (res.data.token) {
               localStorage.setItem('access-token', res.data.token);
             }
+            
+
           })
           .catch(error => console.error("Error fetching token:", error))
           .finally(() => setLoading(false));
