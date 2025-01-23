@@ -14,6 +14,7 @@ import TeachApplications from "../Pages/Dashboard/TeacherRequest/TeachApplicatio
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import AddClass from "../Pages/Dashboard/Teacher Dashboard/AddClass";
 import AllClasses from "../Pages/Dashboard/AllClasses/AllClasses";
+import AllApprovedClasses from "../Pages/AllApprovedClasses/AllApprovedClasses";
 
 export  const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ export  const router = createBrowserRouter([
           path: 'teach',
           element: <PrivateRoute> <Teach></Teach> </PrivateRoute>
 
+        },
+        {
+          path: 'classes',
+          element: <AllApprovedClasses></AllApprovedClasses>
         }
       ]
     },
