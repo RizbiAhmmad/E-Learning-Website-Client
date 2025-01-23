@@ -15,6 +15,7 @@ import Profile from "../Pages/Dashboard/Profile/Profile";
 import AddClass from "../Pages/Dashboard/Teacher Dashboard/AddClass";
 import AllClasses from "../Pages/Dashboard/AllClasses/AllClasses";
 import AllApprovedClasses from "../Pages/AllApprovedClasses/AllApprovedClasses";
+import MyClasses from "../Pages/Dashboard/Teacher Dashboard/MyClasses";
 
 export  const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ export  const router = createBrowserRouter([
         {
           path: 'add-class',
           element: <AddClass></AddClass>
+        },
+        {
+          path:'my-classes',
+          element: <MyClasses></MyClasses>
         }
       ]
     }

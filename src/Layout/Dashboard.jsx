@@ -90,7 +90,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {userRole === "user" && (
+          {/* {userRole === "user" && (
             <div className="">
               Current User Role: {userRole}
               <li>
@@ -104,7 +104,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </div>
-          )}
+          )} */}
         </ul>
       </div>
       <div className="flex-1">
