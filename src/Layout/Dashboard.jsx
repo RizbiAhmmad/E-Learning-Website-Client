@@ -73,6 +73,11 @@ const Dashboard = () => {
             <div className="">
               Current User Role: {userRole}
               <li>
+                <NavLink to="/">
+                  <FaHome></FaHome> Home
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/dashboard/add-class">
                   <FaChalkboardTeacher /> Add Class
                 </NavLink>

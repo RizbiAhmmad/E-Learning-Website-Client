@@ -16,6 +16,7 @@ import AddClass from "../Pages/Dashboard/Teacher Dashboard/AddClass";
 import AllClasses from "../Pages/Dashboard/AllClasses/AllClasses";
 import AllApprovedClasses from "../Pages/AllApprovedClasses/AllApprovedClasses";
 import MyClasses from "../Pages/Dashboard/Teacher Dashboard/MyClasses";
+import UpdateClass from "../Pages/Dashboard/Teacher Dashboard/UpdateClass";
 
 export  const router = createBrowserRouter([
     {
@@ -76,7 +77,11 @@ export  const router = createBrowserRouter([
         {
           path:'my-classes',
           element: <MyClasses></MyClasses>
-        }
+        },
+        {
+          path:'update-class/:id',
+          element: <UpdateClass></UpdateClass>
+        },
       ]
     }
   ]);  
