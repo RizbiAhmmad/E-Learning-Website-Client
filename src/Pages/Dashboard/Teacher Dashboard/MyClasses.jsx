@@ -11,7 +11,7 @@ const MyClasses = () => {
   const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     if (user?.email) {
       axiosPublic
@@ -58,6 +58,7 @@ const MyClasses = () => {
 
   const handleDetails = (classId) => {
     navigate(`/dashboard/my-class/${classId}`);
+    console.log(classId);
   };
 
   return (
@@ -94,35 +95,36 @@ const MyClasses = () => {
                 transition={{ delay: 0.4 }}
               >
                 <h2 className="text-lg font-bold mt-4">{cls.title}</h2>
+                <p className="text-sm text-gray-800">{cls.description}</p>
                 <p className="text-sm text-gray-600">Teacher: {cls.name}</p>
                 <p className="text-sm text-gray-600">Email: {cls.email}</p>
                 <p className="text-sm text-gray-600">Price: ${cls.price}</p>
                 <p className="text-sm text-gray-600">Status: {cls.status}</p>
-                <p className="mt-2">{cls.description}</p>
+                
               </motion.div>
               <motion.div
-                className="mt-auto flex gap-2"
+                className="mt-auto justify-evenly flex gap-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
                 <button
                   onClick={() => handleUpdate(cls._id)}
-                  className="bg-blue-500 text-white px-3 py-1.5 rounded text-sm hover:bg-blue-600 transition-transform"
+                  className="bg-blue-500 text-white px-2 py-1.5 rounded text-sm hover:bg-blue-600 transition-transform"
                 >
                   Update
                 </button>
                 <button
                   onClick={() => handleDelete(cls._id)}
-                  className="bg-red-500 text-white px-3 py-1.5 rounded text-sm hover:bg-red-600 transition-transform"
+                  className="bg-red-500 text-white px-2 py-1.5 rounded text-sm hover:bg-red-600 transition-transform"
                 >
                   Delete
                 </button>
                 <button
                   onClick={() => handleDetails(cls._id)}
-                  disabled={cls.status !== "Approved"}
-                  className={`px-3 py-1.5 rounded text-sm ${
-                    cls.status === "Approved"
+                  disabled={cls.status !== "approved"}
+                  className={`px-2 py-1.5 rounded text-sm ${
+                    cls.status === "approved"
                       ? "bg-green-500 text-white hover:bg-green-600"
                       : "bg-gray-400 text-gray-200 cursor-not-allowed"
                   }`}

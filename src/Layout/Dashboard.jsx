@@ -21,12 +21,12 @@ const Dashboard = () => {
     if (user && user.email) {
       // Ensure `user` is not null
       const userEmail = user?.email;
-      console.log(userEmail);
+      // console.log(userEmail);
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
         .then((response) => {
           setUserRole(response.data.role); // Update the state with the role
-          console.log("User Role:", response.data.role);
+          // console.log("User Role:", response.data.role);
         })
         .catch((error) => console.error("Error fetching user role:", error));
     }
@@ -71,7 +71,7 @@ const Dashboard = () => {
 
           {userRole === "teacher" && (
             <div className="">
-              Current User Role: {userRole}
+              
               <li>
                 <NavLink to="/">
                   <FaHome></FaHome> Home
