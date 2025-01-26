@@ -19,13 +19,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (user && user.email) {
-      // Ensure `user` is not null
       const userEmail = user?.email;
       // console.log(userEmail);
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
         .then((response) => {
-          setUserRole(response.data.role); // Update the state with the role
+          setUserRole(response.data.role); 
           // console.log("User Role:", response.data.role);
         })
         .catch((error) => console.error("Error fetching user role:", error));
@@ -95,7 +94,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* {userRole === "user" && (
+          {userRole === "user" && (
             <div className="">
               Current User Role: {userRole}
               <li>
@@ -109,12 +108,21 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </div>
-          )} */}
+          )}
         </ul>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 p-4">
+        {/* Welcome Message */}
+        {user && (
+          <div className="mb-4 p-4 bg-blue-100 text-blue-800 rounded-lg text-center shadow">
+            <h1 className="text-xl font-semibold">
+              Hey, Welcome to your Dashboard, {user.displayName || "User"}!
+            </h1>
+          </div>
+        )}
+        
         {/* dashboard content */}
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     </div>
   );
