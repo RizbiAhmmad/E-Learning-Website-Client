@@ -4,6 +4,7 @@ import Partners from '../Components/Partners';
 import CallToAction from '../Components/CallToAction';
 import FunFacts from '../Components/FunFacts';
 import BecomeInstructor from '../Components/BecomeInstructor';
+import OurTopCourses from '../Components/OurTopCourses';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner></Banner>
             <Partners></Partners>
             <BecomeInstructor></BecomeInstructor>
+            <OurTopCourses></OurTopCourses>
             <FunFacts></FunFacts>
             <CallToAction></CallToAction>
         </div>

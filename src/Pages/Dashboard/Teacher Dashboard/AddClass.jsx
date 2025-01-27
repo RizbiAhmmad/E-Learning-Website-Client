@@ -11,13 +11,18 @@ const AddClass = () => {
   const axiosSecure = useAxiosSecure(); 
 
   const onSubmit = async (data) => {
-    // Add additional fields
-    data.status = "pending"; // Default status
-    data.name = user?.displayName || "Unknown";
-    data.email = user?.email || "Unknown";
+
+    const classData = {
+      ...data,
+      teacherName: user?.displayName || "Unknown",
+      teacherEmail: user?.email || "Unknown",
+      status: "pending",
+    };
+
+
 
     try {
-      const response = await axiosSecure.post("/classes", data); 
+      const response = await axiosSecure.post("/classes", classData); 
       if (response.data.insertedId) {
         Swal.fire({
           title: "Class Added!",
@@ -66,7 +71,7 @@ const AddClass = () => {
           <input
             type="text"
             defaultValue={user?.displayName || ""}
-            {...register("name")}
+            
             readOnly
             className="w-full px-4 py-2 border rounded-lg bg-gray-100"
           />
@@ -78,7 +83,7 @@ const AddClass = () => {
           <input
             type="email"
             defaultValue={user?.email || ""}
-            {...register("email")}
+            
             readOnly
             className="w-full px-4 py-2 border rounded-lg bg-gray-100"
           />

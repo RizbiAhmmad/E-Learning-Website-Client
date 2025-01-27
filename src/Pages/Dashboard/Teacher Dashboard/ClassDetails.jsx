@@ -6,13 +6,14 @@ import { useParams } from "react-router-dom";
 const ClassDetails = () => {
   const { classId } = useParams(); 
   console.log("classId:", classId);
+
   const axiosPublic = useAxiosPublic();
   const [classData, setClassData] = useState(null);
   const [totalEnrollment, setTotalEnrollment] = useState(0);
   const [totalAssignments, setTotalAssignments] = useState(0);
   const [totalSubmits, setTotalSubmits] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
-
+const [payments, setPayments] = useState([]);
   useEffect(() => {
     axiosPublic
       .get(`/classes/${classId}`)
@@ -27,7 +28,22 @@ const ClassDetails = () => {
         setTotalSubmits(classData.submits || 0);
       })
       .catch((error) => console.error("Error fetching class details:", error));
+
+      const fetchPayments = async () => {
+        try {
+          const response = await fetch("http://localhost:5000/payments"); // Fetch all payments
+          const data = await response.json();
+          // Filter payments where BuyerEmail matches user.email
+          const filteredPayments = data.filter(payment => payment.courseId === classId);
+          setPayments(filteredPayments); // Update state with filtered data
+        } catch (error) {
+          console.error("Error fetching payments:", error);
+        }
+      };
+      fetchPayments()
   }, [classId, axiosPublic]);
+
+ 
 
   const handleAddAssignment = (e) => {
     e.preventDefault();
@@ -64,14 +80,15 @@ const ClassDetails = () => {
         Swal.fire("Error!", "Failed to add the assignment.", "error");
       });
   };
+  console.log(payments);
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6">Class Details</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white p-4 shadow rounded-lg">
-          <h2 className="text-lg font-bold">Total Enrollment</h2>
-          <p className="text-xl">{totalEnrollment}</p>
+          <h2 className="text-lg font-bold">Total Enrollment:</h2>
+          <p className="text-xl">{payments.length}</p>
         </div>
         <div className="bg-white p-4 shadow rounded-lg">
           <h2 className="text-lg font-bold">Total Assignments</h2>

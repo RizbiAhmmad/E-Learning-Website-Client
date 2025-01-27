@@ -15,15 +15,15 @@ const MyClasses = () => {
   useEffect(() => {
     if (user?.email) {
       axiosPublic
-        .get(`/classes?teacherEmail=${user.email}`)
-        .then((response) => {
-          setClasses(response.data);
+        .get(`/classes?agentEmail=${user.email}`)
+        .then(response => {
+          setClasses(response.data); // Handle success
           setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching classes:", error);
+      })
+      .catch(error => {
+          console.error("Error fetching properties:", error); // Handle err
           setLoading(false);
-        });
+      });
     }
   }, [axiosPublic, user]);
 
@@ -52,6 +52,7 @@ const MyClasses = () => {
     });
   };
 
+  console.log(classes);
   const handleUpdate = (classId) => {
     navigate(`/dashboard/update-class/${classId}`);
   };
@@ -63,7 +64,7 @@ const MyClasses = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">My Classes</h1>
+      <h1 className="text-2xl font-bold mb-6">My Classes: {classes.length}</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -73,17 +74,17 @@ const MyClasses = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {classes.map((cls) => (
+          {classes?.map((cls) => (
             <motion.div
-              key={cls._id}
+              key={cls?._id}
               className="bg-white shadow-md p-4 rounded-lg flex flex-col hover:shadow-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               layout
             >
               <motion.img
-                src={cls.image}
-                alt={cls.title}
+                src={cls?.image}
+                alt={cls?.title}
                 className="w-full h-40 object-cover rounded"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -94,12 +95,12 @@ const MyClasses = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <h2 className="text-lg font-bold mt-4">{cls.title}</h2>
-                <p className="text-sm text-gray-800">{cls.description}</p>
-                <p className="text-sm text-gray-600">Teacher: {cls.name}</p>
-                <p className="text-sm text-gray-600">Email: {cls.email}</p>
-                <p className="text-sm text-gray-600">Price: ${cls.price}</p>
-                <p className="text-sm text-gray-600">Status: {cls.status}</p>
+                <h2 className="text-lg font-bold mt-4">{cls?.title}</h2>
+                <p className="text-sm text-gray-800">{cls?.description}</p>
+                <p className="text-sm text-gray-600">Teacher: {cls?.teacherName}</p>
+                <p className="text-sm text-gray-600">Email: {cls?.teacherEmail}</p>
+                <p className="text-sm text-gray-600">Price: ${cls?.price}</p>
+                <p className="text-sm text-gray-600">Status: {cls?.status}</p>
                 
               </motion.div>
               <motion.div

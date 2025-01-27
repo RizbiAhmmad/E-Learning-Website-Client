@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
@@ -17,7 +17,9 @@ const ApprovedClassDetails = () => {
   }, [axiosSecure, id]);
 
   const handlePayment = () => {
-    navigate(`/payment`, { state: { classId: classDetails._id, classPrice: classDetails.price } });
+    navigate(`/payment`, {
+      state: { classId: classDetails._id, classPrice: classDetails.price },
+    });
   };
 
   if (!classDetails) {
@@ -55,6 +57,10 @@ const ApprovedClassDetails = () => {
           Pay Now
         </motion.button>
       </motion.div>
+
+      <Link to={`/payment/${classDetails._id}`}>
+        <button className="btn btn-primary">PAY Now 2</button>
+      </Link>
     </div>
   );
 };

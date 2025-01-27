@@ -103,6 +103,11 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/dashboard/my-enroll">
+                  <FaHome></FaHome> My Enroll Class
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/dashboard/profile">
                   <CgProfile></CgProfile> Profile
                 </NavLink>

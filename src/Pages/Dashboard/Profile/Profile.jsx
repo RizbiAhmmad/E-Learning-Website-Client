@@ -10,13 +10,13 @@ const Profile = () => {
 
   useEffect(() => {
     if (user && user.email) {
-      // Ensure `user` is not null
+      
       const userEmail = user?.email;
       console.log(userEmail);
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
         .then((response) => {
-          setUserRole(response.data.role); // Update the state with the role
+          setUserRole(response.data.role); 
           console.log("User Role:", response.data.role);
         })
         .catch((error) => console.error("Error fetching user role:", error));
@@ -40,8 +40,8 @@ const Profile = () => {
         <h3 className="text-xl font-semibold">{user?.displayName || "N/A"}</h3>
         <p className="text-gray-500 mb-2">{user?.email || "N/A"}</p>
         <p className="text-gray-700 font-medium">
-          Role: {userRole || "User"}
-        </p>
+  Role: {userRole === 'user' ? 'Student' : userRole?.charAt(0).toUpperCase() + userRole?.slice(1) || "N/A"}
+</p>
       </div>
     </div>
   );

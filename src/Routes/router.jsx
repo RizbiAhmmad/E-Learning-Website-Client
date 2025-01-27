@@ -20,6 +20,7 @@ import UpdateClass from "../Pages/Dashboard/Teacher Dashboard/UpdateClass";
 import ClassDetails from "../Pages/Dashboard/Teacher Dashboard/ClassDetails";
 import ApprovedClassDetails from "../Pages/AllApprovedClasses/ApprovedClassDetails/ApprovedClassDetails";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import MyEnrollClass from "../Pages/Dashboard/Student/MyEnrollClass";
 
 export  const router = createBrowserRouter([
     {
@@ -52,7 +53,7 @@ export  const router = createBrowserRouter([
           element: <ApprovedClassDetails></ApprovedClassDetails>
         },
         {
-          path: 'payment',
+          path: 'payment/:id',
           element: <Payment></Payment>
         }
       ]
@@ -96,6 +97,11 @@ export  const router = createBrowserRouter([
         {
           path:'update-class/:id',
           element: <UpdateClass></UpdateClass>
+        },
+        // USers
+        {
+          path:'my-enroll',
+          element: <MyEnrollClass></MyEnrollClass>
         },
       ]
     }
