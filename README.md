@@ -1,12 +1,12 @@
 🎓 E-Learning Platform
 Welcome to E-Learning, your one-stop platform to access a wide variety of online courses. Whether you're a student eager to learn or a teacher looking to share knowledge, E-Learning connects you with quality education in an easy and interactive way.
 
-🌐 Live Website
-🔗 Visit the E-Learning Website
+🌐 Live Website: https://e-learning-f11fe.web.app/
+
 
 🛠 Admin Access
-Admin Username: admin@example.com
-Admin Password: password123
+Admin Username: admin1234@gmail.com
+Admin Password: Admin1234
 📌 Features
 Here are the key features of E-Learning:
 

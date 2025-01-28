@@ -23,20 +23,21 @@ const Profile = () => {
     }
   }, [axiosPublic, user]);
 
-  console.log(userRole);
+  // console.log(userRole);
 
-
+  
 
 
   return (
     <div className="p-8">
+      
       <h2 className="text-3xl font-bold mb-6">My Profile : {userRole}</h2>
       <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
         <img
           src={user?.photoURL || "https://via.placeholder.com/150"}
           alt="Profile"
           className="w-24 h-24 rounded-full mb-4"
-        />
+        />       
         <h3 className="text-xl font-semibold">{user?.displayName || "N/A"}</h3>
         <p className="text-gray-500 mb-2">{user?.email || "N/A"}</p>
         <p className="text-gray-700 font-medium">

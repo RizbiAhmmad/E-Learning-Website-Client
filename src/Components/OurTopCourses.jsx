@@ -9,7 +9,7 @@ const OurTopCourses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:5000/classes");
+        const response = await fetch("https://e-learning-server-theta.vercel.app/classes");
         const data = await response.json();
 
         // Filter only approved courses

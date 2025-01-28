@@ -31,7 +31,7 @@ const [payments, setPayments] = useState([]);
 
       const fetchPayments = async () => {
         try {
-          const response = await fetch("http://localhost:5000/payments"); // Fetch all payments
+          const response = await fetch("https://e-learning-server-theta.vercel.app/payments"); // Fetch all payments
           const data = await response.json();
           // Filter payments where BuyerEmail matches user.email
           const filteredPayments = data.filter(payment => payment.courseId === classId);
