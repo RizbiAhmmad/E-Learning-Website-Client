@@ -30,7 +30,8 @@ const AllUsers = () => {
             }
         })
     }
-
+    
+    // console.log(userRole);
     const handleDeleteUser = user => {
         Swal.fire({
             title: "Are you sure?",
