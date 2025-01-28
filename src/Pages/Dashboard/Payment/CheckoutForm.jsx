@@ -2,7 +2,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";  // Import SweetAlert2
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -12,15 +13,15 @@ const CheckoutForm = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const [transactionId, setTransactionId] = useState('')
-  const [clientSecret, setClientSecret] = useState('')
-  
+  const [transactionId, setTransactionId] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
+
   useEffect(() => {
     axiosSecure
       .get(`/classes/${id}`)
       .then((response) => {
         setCourse(response.data);
-
         console.log(response.data);
 
         if (response.data?.price > 0) {
@@ -28,7 +29,6 @@ const CheckoutForm = () => {
             .post("/create-payment-intent", {
               price: response.data?.price,
             })
-
             .then((res) => {
               setClientSecret(res.data.clientSecret);
             });
@@ -50,6 +50,7 @@ const CheckoutForm = () => {
     if (card === null) {
       return;
     }
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -63,53 +64,55 @@ const CheckoutForm = () => {
       setError("");
     }
 
-
-    const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card,
-            billing_details: {
-                email: user?.email || 'anonymous',
-                name: user?.displayName || 'anonymous'
-            }
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          email: user?.email || 'anonymous',
+          name: user?.displayName || 'anonymous'
         }
-    })
+      }
+    });
 
     if (confirmError) {
-        console.log('confirm error')
+      console.log('confirm error');
     } else {
-        console.log('payment intent',paymentIntent)
-        if(paymentIntent.status === 'succeeded'){
-            
-            setTransactionId(paymentIntent.id)
+      console.log('payment intent', paymentIntent);
+      if (paymentIntent.status === 'succeeded') {
+        setTransactionId(paymentIntent.id);
 
-            
-            const payment = {
-                BuyerName: user?.displayName,
-                BuyerEmail: user?.email,
-                price: course?.price, 
-                transactionId: paymentIntent.id,
-                date: new Date(),
-                courseTitle: course.title,
-                courseId: course._id,
-                teacherEmail: course.teacherEmail
+        const payment = {
+          BuyerName: user?.displayName,
+          BuyerEmail: user?.email,
+          price: course?.price,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+          courseTitle: course.title,
+          courseId: course._id,
+          teacherEmail: course.teacherEmail
+        };
 
-                
-            }
+        console.log(payment);
 
-            console.log(payment);
+        const res = await axiosSecure.post('/payments', payment);
+        console.log('payment saved', res.data);
 
-            const res = await axiosSecure.post('/payments', payment)
-            console.log('payment saves', res.data)
-           
-
-        }
-
+        // Show SweetAlert success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Payment Successful!',
+          text: 'Your payment has been successfully processed.',
+        }).then(() => {
+          // Navigate to 'My Enrolled Classes' page
+          navigate('/dashboard/my-enroll');
+        });
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>PAY NOW : {course?.price} </p>
+      <p>PAY NOW: {course?.price} </p>
       <CardElement
         options={{
           style: {
@@ -134,9 +137,7 @@ const CheckoutForm = () => {
         Pay
       </button>
       <p className="text-red-600">{error}</p>
-      {
-        transactionId && <p className="text-green-500 text-sm">Your transaction ID: {transactionId}</p>
-      }
+      {transactionId && <p className="text-green-500 text-sm">Your transaction ID: {transactionId}</p>}
     </form>
   );
 };

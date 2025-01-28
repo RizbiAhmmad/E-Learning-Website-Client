@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
@@ -52,7 +52,7 @@ const MyEnrollClass = () => {
               </p>
               <button
                 className="w-full bg-blue-500 text-white py-2 mt-4 rounded hover:bg-blue-600"
-                // onClick={() => navigate(`/classes/${cls._id}`)}
+                // onClick={() => navigate(`dashboard/my-enroll/${_id}`)}
               >
                 Continue
               </button>
