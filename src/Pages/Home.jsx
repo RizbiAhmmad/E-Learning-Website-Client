@@ -5,6 +5,7 @@ import CallToAction from '../Components/CallToAction';
 import FunFacts from '../Components/FunFacts';
 import BecomeInstructor from '../Components/BecomeInstructor';
 import OurTopCourses from '../Components/OurTopCourses';
+import Testimonials from '../Components/Testimonials';
 
 const Home = () => {
     return (
@@ -12,7 +13,8 @@ const Home = () => {
             <Banner></Banner>
             <Partners></Partners>
             <OurTopCourses></OurTopCourses>
-            <BecomeInstructor></BecomeInstructor>           
+            <BecomeInstructor></BecomeInstructor> 
+            <Testimonials></Testimonials>          
             <FunFacts></FunFacts>
             <CallToAction></CallToAction>
         </div>

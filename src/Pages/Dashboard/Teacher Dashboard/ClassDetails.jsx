@@ -52,6 +52,7 @@ const [payments, setPayments] = useState([]);
       title: formData.get("title"),
       deadline: formData.get("deadline"),
       description: formData.get("description"),
+      marks: formData.get("marks"),
     };
 
     axiosPublic
@@ -168,6 +169,15 @@ const [payments, setPayments] = useState([]);
                 className="border p-2 w-full rounded"
                 required
               ></textarea>
+            </div>
+            <div className="mb-4">
+              <label className="block mb-2 font-medium">Marks</label>
+              <input
+                type="number"
+                name="marks"
+                className="border p-2 w-full rounded"
+                required
+              />
             </div>
             <button
               type="submit"

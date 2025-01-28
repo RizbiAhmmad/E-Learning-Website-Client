@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MyEnrollClass = () => {
   const { user } = useAuth();
@@ -15,11 +16,15 @@ const MyEnrollClass = () => {
     const fetchEnrolledClasses = async () => {
       try {
         const { data } = await axiosSecure.get("/payments");
-        const userPayments = data.filter((payment) => payment.BuyerEmail === user.email);
-        
+        const userPayments = data.filter(
+          (payment) => payment.BuyerEmail === user.email
+        );
+
         // Fetch class details for each enrolled class
         const classRequests = userPayments.map((payment) =>
-          axiosSecure.get(`/classes/${payment.courseId}`).then((res) => res.data)
+          axiosSecure
+            .get(`/classes/${payment.courseId}`)
+            .then((res) => res.data)
         );
 
         const classDetails = await Promise.all(classRequests);
@@ -44,18 +49,27 @@ const MyEnrollClass = () => {
             key={cls._id}
             className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
           >
-            <img src={cls.image} alt={cls.title} className="w-full h-40 object-cover" />
+            <img
+              src={cls.image}
+              alt={cls.title}
+              className="w-full h-40 object-cover"
+            />
             <div className="p-4">
               <h2 className="text-xl font-bold text-gray-800">{cls.title}</h2>
               <p className="text-gray-600 mt-2">
                 <strong>Teacher:</strong> {cls.teacherName || "Unknown"}
               </p>
-              <button
+              {/* <button
                 className="w-full bg-blue-500 text-white py-2 mt-4 rounded hover:bg-blue-600"
                 // onClick={() => navigate(`dashboard/my-enroll/${_id}`)}
               >
                 Continue
-              </button>
+              </button> */}
+              <Link to={`/dashboard/my-enroll/${cls._id}`}>
+                <button className="w-full bg-blue-500 text-white py-2 mt-4 rounded hover:bg-blue-600">
+                  Continue
+                </button>
+              </Link>
             </div>
           </div>
         ))}
