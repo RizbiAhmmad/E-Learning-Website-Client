@@ -48,19 +48,12 @@ const ApprovedClassDetails = () => {
         <p className="text-gray-700 mb-4 text-center">
           {classDetails.description}
         </p>
-        <motion.button
-          className="bg-blue-500 text-white py-2 px-4 rounded-lg w-1/2 mx-auto block hover:bg-blue-600"
-          onClick={handlePayment}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Pay Now
-        </motion.button>
+        <Link to={`/payment/${classDetails._id}`}>
+        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg w-1/2 mx-auto block hover:bg-blue-600">PAY Now</button>
+      </Link>
       </motion.div>
 
-      <Link to={`/payment/${classDetails._id}`}>
-        <button className="btn btn-primary">PAY Now 2</button>
-      </Link>
+      
     </div>
   );
 };

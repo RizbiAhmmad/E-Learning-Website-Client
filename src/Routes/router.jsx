@@ -21,11 +21,13 @@ import ClassDetails from "../Pages/Dashboard/Teacher Dashboard/ClassDetails";
 import ApprovedClassDetails from "../Pages/AllApprovedClasses/ApprovedClassDetails/ApprovedClassDetails";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import MyEnrollClass from "../Pages/Dashboard/Student/MyEnrollClass";
+import ErrorPages from "../Components/ErrorPages";
 
 export  const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement: <ErrorPages></ErrorPages>,
       children: [
         {
             path: "/",

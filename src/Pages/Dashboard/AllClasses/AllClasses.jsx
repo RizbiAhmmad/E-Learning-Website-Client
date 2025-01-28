@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
-  const [classes, setClasses] = useState([]);
 
-  // Fetch all classes
-  useEffect(() => {
-    axiosSecure
-      .get("/classes")
-      .then((response) => setClasses(response.data))
-      .catch((error) => console.error("Error fetching classes:", error));
-  }, [axiosSecure]);
+  // Fetch all classes using react-query
+  const { data: classes = [], refetch } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/classes");
+      return res.data;
+    },
+  });
 
   // Handle Approve
   const handleApprove = async (id) => {
     try {
       await axiosSecure.patch(`/classes/${id}`, { status: "approved" });
       Swal.fire("Success!", "Class approved successfully.", "success");
-      setClasses((prev) =>
-        prev.map((cls) =>
-          cls._id === id ? { ...cls, status: "approved" } : cls
-        )
-      );
+      refetch(); // Refetch data after update
     } catch (error) {
       Swal.fire("Error!", "Failed to approve class.", "error");
       console.error(error);
@@ -35,18 +31,13 @@ const AllClasses = () => {
     try {
       await axiosSecure.patch(`/classes/${id}`, { status: "rejected" });
       Swal.fire("Success!", "Class rejected successfully.", "success");
-      setClasses((prev) =>
-        prev.map((cls) =>
-          cls._id === id ? { ...cls, status: "rejected" } : cls
-        )
-      );
+      refetch(); // Refetch data after update
     } catch (error) {
       Swal.fire("Error!", "Failed to reject class.", "error");
       console.error(error);
     }
   };
 
-  // Render Table
   return (
     <div className="max-w-6xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-md">
       <h2 className="text-3xl font-bold text-center mb-6">All Classes</h2>
@@ -68,10 +59,8 @@ const AllClasses = () => {
               <td className="border border-gray-300 px-4 py-2">
                 <img src={cls.image} alt={cls.title} className="h-12 w-12" />
               </td>
-              <td className="border border-gray-300 px-4 py-2">{cls.email}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {cls.description}
-              </td>
+              <td className="border border-gray-300 px-4 py-2">{cls.teacherEmail}</td>
+              <td className="border border-gray-300 px-4 py-2">{cls.description}</td>
               <td className="border border-gray-300 px-4 py-2">
                 {cls.status === "pending" && (
                   <>
@@ -90,9 +79,7 @@ const AllClasses = () => {
                   </>
                 )}
                 {cls.status !== "pending" && (
-                  <span className="text-gray-600 capitalize">
-                    {cls.status}
-                  </span>
+                  <span className="text-gray-600 capitalize">{cls.status}</span>
                 )}
               </td>
               <td className="border border-gray-300 px-4 py-2">

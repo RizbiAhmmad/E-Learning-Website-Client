@@ -96,7 +96,6 @@ const Dashboard = () => {
 
           {userRole === "user" && (
             <div className="">
-              Current User Role: {userRole}
               <li>
                 <NavLink to="/">
                   <FaHome></FaHome> Home
