@@ -1,5 +1,5 @@
 
-## 🎓 E-Learning Platform  
+# 🎓 E-Learning Platform  
 
 Welcome to **E-Learning**, your one-stop platform to access a wide variety of online courses. Whether you're a student eager to learn or a teacher looking to share knowledge, **E-Learning** connects you with quality education in an easy and interactive way.  
 
@@ -7,6 +7,10 @@ Welcome to **E-Learning**, your one-stop platform to access a wide variety of on
 
 ## 🌐 **Live Website**  
 [🔗 E-Learning Platform](https://e-learning-f11fe.web.app/)  
+
+### 🔑 **Admin Credentials**  
+- **Email:** `admin1234@gmail.com`  
+- **Password:** `Admin1234`  
 
 ---
 
