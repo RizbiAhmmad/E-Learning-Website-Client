@@ -1,6 +1,3 @@
-Here’s a **well-structured `README.md`** file based on your criteria, with all the necessary details for a **GitHub repository**.  
-
----
 
 ## 🎓 E-Learning Platform  
 
