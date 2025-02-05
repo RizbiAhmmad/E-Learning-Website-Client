@@ -1,43 +1,130 @@
 🎓 E-Learning Platform
 Welcome to E-Learning, your one-stop platform to access a wide variety of online courses. Whether you're a student eager to learn or a teacher looking to share knowledge, E-Learning connects you with quality education in an easy and interactive way.
 
-🌐 Live Website: https://e-learning-f11fe.web.app/
+🌐 Live Website
+🔗 E-Learning Platform
 
-
-🛠 Admin Access
-Admin Username: admin1234@gmail.com
-Admin Password: Admin1234
+🛠 Technologies Used
+Frontend:
+⚡ React – JavaScript library for UI development
+🎨 Tailwind CSS & DaisyUI – Styling framework for modern UI
+🔄 React Router – For seamless navigation
+🚀 Framer Motion – Smooth animations
+🔥 Firebase – Authentication & hosting
+📊 React Query – Data fetching & caching
+Backend:
+🛡 Express.js – Fast and lightweight backend framework
+🗄 MongoDB – NoSQL database
+🔑 JWT Authentication – Secure user authentication
+💳 Stripe – Payment gateway integration
 📌 Features
-Here are the key features of E-Learning:
+✅ User Authentication
 
-User Authentication:
+Secure login & registration for students and teachers
+Role-based access (students, teachers, and admins)
+✅ Browse & Enroll in Courses
 
-Secure login & registration for students and teachers.
-Role-based access (students, teachers, and admins).
-Browse & Enroll in Courses:
+Access a variety of online courses
+Enroll in your favorite classes
+✅ Teacher Dashboard
 
-Access a variety of online courses.
-Enroll in your favorite classes directly from the course list.
-Teacher Dashboard:
+Add new courses, manage students, and track performance
+✅ Admin Dashboard
 
-Teachers can add new classes, view applications, and manage existing courses.
-Get detailed stats on the classes you teach.
-Admin Dashboard:
+Full control over courses, users, and applications
+✅ Interactive Classrooms
 
-Full control for managing classes, users, and applications.
-Approve, update, or delete courses as an admin.
-Detailed Course Listings:
+Engage with teachers & students through the platform
+✅ Secure Payments
 
-Browse available courses with a brief description, price, status, and teacher information.
-Course Details:
+Integrated Stripe payment system for enrolling in courses
+✅ Profile Management
 
-View in-depth information about a course, including syllabus, price, and difficulty level.
-Interactive Classrooms:
+Students & teachers can update and manage their profiles
+📦 Dependencies
+Frontend (Client-Side)
+json
+Copy
+Edit
+"dependencies": {
+  "@smastrom/react-rating": "^1.5.0",
+  "@stripe/react-stripe-js": "^3.1.1",
+  "@stripe/stripe-js": "^5.5.0",
+  "@tanstack/react-query": "^5.64.1",
+  "axios": "^1.7.9",
+  "firebase": "^11.1.0",
+  "framer-motion": "^11.18.2",
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-router-dom": "^7.1.1",
+  "tailwindcss": "^3.4.17",
+  "daisyui": "^4.12.23"
+}
+Backend (Server-Side)
+json
+Copy
+Edit
+"dependencies": {
+  "cors": "^2.8.5",
+  "dotenv": "^16.4.7",
+  "express": "^4.21.2",
+  "jsonwebtoken": "^9.0.2",
+  "mongodb": "^6.12.0",
+  "stripe": "^17.5.0"
+}
+🚀 Getting Started
+Prerequisites
+Before running the project, make sure you have the following installed:
 
-Teachers and students can interact within the platform to enhance learning experiences.
-Profile Management:
+Node.js (v16 or later)
+MongoDB (local or cloud database)
+Git (for cloning the repository)
+Installation Steps
+1️⃣ Clone the Repository
+sh
+Copy
+Edit
+git clone https://github.com/YOUR_GITHUB_USERNAME/e-learning-platform.git
+cd e-learning-platform
+2️⃣ Install Dependencies
+Frontend
+sh
+Copy
+Edit
+cd client
+npm install
+npm run dev
+Backend
+sh
+Copy
+Edit
+cd server
+npm install
+npm start
+3️⃣ Set Up Environment Variables
+Create a .env file in the server directory and add the following:
 
-Both students and teachers can update and manage their profiles.
-Secure Payment Integration:
+env
+Copy
+Edit
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET=your_stripe_secret_key
+4️⃣ Start the Development Server
+Frontend: Runs on http://localhost:5173/
+Backend: Runs on http://localhost:5000/
+🔗 Live Project & Resources
+Live Website: E-Learning Platform
+Backend Repository: E-Learning Server
+Frontend Repository: E-Learning Client
+🤝 Contributing
+We welcome contributions! If you’d like to improve this project, please:
 
-Enroll in courses with secure and easy payment methods.
+Fork the repository
+Create a feature branch (feature-name)
+Commit your changes
+Open a pull request
+📜 License
+This project is open-source under the MIT License.
+
