@@ -138,8 +138,8 @@ STRIPE_SECRET=your_stripe_secret_key
 
 ## 🔗 **Live Project & Resources**  
 - **Live Website:** [E-Learning Platform](https://e-learning-f11fe.web.app/)  
-- **Backend Repository:** [E-Learning Server](https://github.com/YOUR_GITHUB_USERNAME/e-learning-server)  
-- **Frontend Repository:** [E-Learning Client](https://github.com/YOUR_GITHUB_USERNAME/e-learning-client)  
+- **Backend Repository:** [E-Learning Server](https://github.com/rizbiahmmad/e-learning-server)  
+- **Frontend Repository:** [E-Learning Client](https://github.com/rizbiahmmad/e-learning-client)  
 
 ---
 
