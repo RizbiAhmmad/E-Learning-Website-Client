@@ -23,24 +23,32 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-cyan-950 text-white p-4 md:p-6 sticky top-0 z-10 shadow-md">
+    <nav className="bg-cyan-950 text-white px-8 py-4 sticky top-0 z-10 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Section */}
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-4 cursor-pointer">
           <img
-            className="h-8 w-8 md:h-10 md:w-10 object-cover"
+            className="h-8 w-8 object-cover"
             src="https://img.freepik.com/premium-vector/e-learning-concept_24911-16717.jpg"
             alt="Logo"
           />
-          <h2 className="font-bold text-purple-600 text-xl md:text-2xl">E-Learning</h2>
-        </div>
+          <h2 className="font-bold text-purple-600 text-xl md:text-2xl">
+            E-Learning
+          </h2>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           {menuOpen ? (
-            <AiOutlineClose className="text-2xl cursor-pointer" onClick={() => setMenuOpen(false)} />
+            <AiOutlineClose
+              className="text-2xl cursor-pointer"
+              onClick={() => setMenuOpen(false)}
+            />
           ) : (
-            <AiOutlineMenu className="text-2xl cursor-pointer" onClick={() => setMenuOpen(true)} />
+            <AiOutlineMenu
+              className="text-2xl cursor-pointer"
+              onClick={() => setMenuOpen(true)}
+            />
           )}
         </div>
 
@@ -54,8 +62,8 @@ const Navbar = () => {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-bold border-b-2 border-blue-500 pb-1"
-                : "text-white hover:text-blue-500"
+                ? "text-purple-500 font-bold border-b-2 border-purple-500 pb-1"
+                : "text-white hover:text-purple-500"
             }
           >
             Home
@@ -64,8 +72,8 @@ const Navbar = () => {
             to="/classes"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-bold border-b-2 border-blue-500 pb-1"
-                : "text-white hover:text-blue-500"
+                ? "text-purple-500 font-bold border-b-2 border-purple-500 pb-1"
+                : "text-white hover:text-purple-500"
             }
           >
             All Classes
@@ -74,8 +82,8 @@ const Navbar = () => {
             to="/teach"
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-bold border-b-2 border-blue-500 pb-1"
-                : "text-white hover:text-blue-500"
+                ? "text-purple-500 font-bold border-b-2 border-purple-500 pb-1"
+                : "text-white hover:text-purple-500"
             }
           >
             Teach on Skill Development
@@ -115,7 +123,10 @@ const Navbar = () => {
               )}
             </div>
           ) : (
-            <Link to="/login" className="bg-white text-blue-600 px-4 py-2 rounded">
+            <Link
+              to="/login"
+              className="bg-white text-blue-600 px-4 py-2 rounded"
+            >
               LogIn
             </Link>
           )}
