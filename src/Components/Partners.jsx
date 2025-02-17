@@ -31,13 +31,13 @@ const Partners = () => {
       transition={{ duration: 1 }}
       className="bg-gray-100 py-12"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-8">
         
         <motion.h2
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl font-bold text-center mb-8 text-gray-800"
+          className="text-4xl font-bold text-center mb-8 text-gray-800"
         >
           Our Partners
         </motion.h2>

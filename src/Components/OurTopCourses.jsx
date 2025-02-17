@@ -41,7 +41,7 @@ const OurTopCourses = () => {
   }
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="w-full bg-gray-100 px-8 py-12">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800">
         🌟 Our Top Courses
       </h1>
@@ -78,7 +78,7 @@ const OurTopCourses = () => {
                 className="w-full mt-5 py-3 rounded-lg bg-white text-blue-600 font-semibold hover:bg-gray-200 transition duration-300"
                 whileTap={{ scale: 0.95 }}
               >
-                Explore More 🚀
+                See More 🚀
               </motion.button>
              </Link>
             </div>
