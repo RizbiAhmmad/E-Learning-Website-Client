@@ -8,7 +8,7 @@ import OurTopCourses from '../Components/OurTopCourses';
 import Testimonials from '../Components/Testimonials';
 import LiveChat from '../Components/LiveChat';
 import PricingPlans from '../Components/PricingPlans';
-import LearningProgress from '../Components/LearningProgress';
+import LearningPathPage from '../Components/LearningPathPage';
 
 const Home = () => {
     return (
@@ -17,10 +17,10 @@ const Home = () => {
             <Partners></Partners>
             <OurTopCourses></OurTopCourses>
             <Testimonials></Testimonials>  
-            <BecomeInstructor></BecomeInstructor>  
+            <BecomeInstructor></BecomeInstructor>
+            <LearningPathPage></LearningPathPage>  
             <PricingPlans></PricingPlans>                 
             <FunFacts></FunFacts>
-            <LearningProgress></LearningProgress>
             <LiveChat></LiveChat>
             <CallToAction></CallToAction>
         </div>
