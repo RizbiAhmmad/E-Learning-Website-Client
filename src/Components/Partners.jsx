@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ThemeContext } from "../providers/ThemeProvider";
+
 
 const Partners = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   const partners = [
     {
       name: "Programming Hero",
-      logo: "https://cdn-1.webcatalog.io/catalog/programming-hero/programming-hero-icon.png?v=1714780907586", 
+      logo: "https://cdn-1.webcatalog.io/catalog/programming-hero/programming-hero-icon.png?v=1714780907586",
       description: "Leading provider of online learning solutions.",
     },
     {
@@ -14,7 +19,7 @@ const Partners = () => {
     },
     {
       name: "Tutorials Point",
-      logo: "https://miro.medium.com/v2/resize:fit:2400/2*b8mw7lPrrc9NU-iw2KkaAQ.png", 
+      logo: "https://miro.medium.com/v2/resize:fit:2400/2*b8mw7lPrrc9NU-iw2KkaAQ.png",
       description: "Empowering communities through skill development.",
     },
     {
@@ -29,15 +34,16 @@ const Partners = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="bg-gray-100 py-12"
+      className={`py-12 transition-all duration-300 ${
+        isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      }`}
     >
       <div className="container mx-auto px-8">
-        
         <motion.h2
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-center mb-8 text-gray-800"
+          className="text-4xl font-bold text-center mb-8"
         >
           Our Partners
         </motion.h2>
@@ -45,13 +51,11 @@ const Partners = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center text-gray-600 mb-12"
+          className="text-center mb-12"
         >
-          We collaborate with industry leaders to bring you the best learning
-          experience.
+          We collaborate with industry leaders to bring you the best learning experience.
         </motion.p>
 
-        
         <motion.div
           initial="hidden"
           animate="visible"
@@ -60,10 +64,7 @@ const Partners = () => {
             visible: {
               opacity: 1,
               scale: 1,
-              transition: {
-                delayChildren: 0.3,
-                staggerChildren: 0.2,
-              },
+              transition: { delayChildren: 0.3, staggerChildren: 0.2 },
             },
           }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
@@ -75,7 +76,11 @@ const Partners = () => {
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0 },
               }}
-              className="bg-white rounded-lg shadow-lg p-8 text-center transition-all duration-500 hover:shadow-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white"
+              className={`rounded-lg shadow-lg p-8 text-center transition-all duration-500 ${
+                isDarkMode
+                  ? "bg-gray-900 text-white hover:bg-gray-800"
+                  : "bg-white text-black hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white"
+              }`}
             >
               <motion.img
                 src={partner.logo}
