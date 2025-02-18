@@ -49,7 +49,7 @@ const ApprovedClassDetails = () => {
           {classDetails.description}
         </p>
         <Link to={`/payment/${classDetails._id}`}>
-        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg w-1/2 mx-auto block hover:bg-blue-600">PAY Now</button>
+        <button className="bg-purple-500 text-white py-2 px-4 rounded-lg w-1/2 mx-auto block hover:bg-purple-600">PAY Now</button>
       </Link>
       </motion.div>
 

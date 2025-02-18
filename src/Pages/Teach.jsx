@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const Teach = () => {
   const { user } = useContext(AuthContext);
+  const { isDarkMode } = useContext(ThemeContext); // Get dark mode state
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
   const [role, setRole] = useState(null);
@@ -34,8 +36,6 @@ const Teach = () => {
 
     try {
       const response = await axiosSecure.post("/teach-application", data);
-      console.log("Application submitted:", response.data);
-
       if (response.data.insertedId) {
         Swal.fire({
           title: "Application Submitted!",
@@ -43,7 +43,6 @@ const Teach = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-
         reset();
       } else {
         Swal.fire({
@@ -54,7 +53,6 @@ const Teach = () => {
         });
       }
     } catch (error) {
-      console.error("Error submitting application:", error);
       Swal.fire({
         title: "Error!",
         text: "An unexpected error occurred. Please try again later.",
@@ -65,24 +63,30 @@ const Teach = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow-md">
+    <div
+      className={`max-w-4xl mx-auto mt-10 p-8 rounded-lg shadow-md transition-all duration-300 ${
+        isDarkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       <h2 className="text-3xl font-bold text-center mb-6">Teach on S.D</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* Name Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Name</label>
+          <label className="block font-medium mb-2">Name</label>
           <input
             type="text"
             defaultValue={user?.displayName || ""}
             {...register("name", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-purple-400 border-gray-600" : "bg-white text-black"
+            }`}
             readOnly
           />
         </div>
 
         {/* Profile Picture */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Profile Picture</label>
+          <label className="block font-medium mb-2">Profile Picture</label>
           <div className="flex items-center">
             <img
               src={user?.photoURL || "/default-avatar.png"}
@@ -94,33 +98,39 @@ const Teach = () => {
 
         {/* Email Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Email</label>
+          <label className="block font-medium mb-2">Email</label>
           <input
             type="email"
             defaultValue={user?.email || ""}
             {...register("email", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-purple-400 border-gray-600" : "bg-white text-black"
+            }`}
             readOnly
           />
         </div>
 
         {/* Role Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Role</label>
+          <label className="block font-medium mb-2">Role</label>
           <input
             type="text"
             value={role || "Loading..."}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-purple-400 border-gray-600" : "bg-white text-black"
+            }`}
             readOnly
           />
         </div>
 
         {/* Experience Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Experience</label>
+          <label className="block font-medium mb-2">Experience</label>
           <select
             {...register("experience", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black"
+            }`}
           >
             <option value="beginner">Beginner</option>
             <option value="mid-level">Mid-Level</option>
@@ -130,21 +140,25 @@ const Teach = () => {
 
         {/* Title Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Title</label>
+          <label className="block font-medium mb-2">Title</label>
           <input
             type="text"
             {...register("title", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black"
+            }`}
             placeholder="Enter your teaching title (e.g., Frontend Developer)"
           />
         </div>
 
         {/* Category Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Category</label>
+          <label className="block font-medium mb-2">Category</label>
           <select
             {...register("category", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring ${
+              isDarkMode ? "bg-gray-800 text-white border-gray-600" : "bg-white text-black"
+            }`}
           >
             <option value="web development">Web Development</option>
             <option value="digital marketing">Digital Marketing</option>
@@ -158,7 +172,11 @@ const Teach = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500"
+            className={`px-6 py-2 rounded-lg focus:outline-none focus:ring ${
+              isDarkMode
+                ? "bg-purple-600 text-white hover:bg-purple-500 focus:ring-purple-400"
+                : "bg-purple-600 text-white hover:bg-purple-500 focus:ring-purple-400"
+            }`}
           >
             Submit for Review
           </button>
