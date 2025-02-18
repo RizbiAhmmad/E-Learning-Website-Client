@@ -9,18 +9,20 @@ import Testimonials from '../Components/Testimonials';
 import LiveChat from '../Components/LiveChat';
 import PricingPlans from '../Components/PricingPlans';
 import LearningPathPage from '../Components/LearningPathPage';
+import IndustryTrendsPage from '../Components/IndustryTrendsPage';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <Partners></Partners>
-            <OurTopCourses></OurTopCourses>
-            <Testimonials></Testimonials>  
+            <OurTopCourses></OurTopCourses>            
             <BecomeInstructor></BecomeInstructor>
-            <LearningPathPage></LearningPathPage>  
+            <LearningPathPage></LearningPathPage>
+            <IndustryTrendsPage></IndustryTrendsPage>  
             <PricingPlans></PricingPlans>                 
             <FunFacts></FunFacts>
+            <Testimonials></Testimonials> 
             <LiveChat></LiveChat>
             <CallToAction></CallToAction>
         </div>
