@@ -1,15 +1,25 @@
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { useContext } from "react";
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
 const Footer = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   return (
-    <footer className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 text-gray-300 py-8 mt-8">
+    <footer
+      className={`py-12 px-8 transition-all duration-300 ${
+        isDarkMode ? "bg-black text-gray-400" : "bg-gray-100 text-gray-700"
+      }`}
+    >
       <div className="container mx-auto px-4">
         {/* Top Section */}
         <div className="flex flex-wrap items-center justify-between">
           {/* Left Section */}
-          <div className="w-full lg:w-1/3 mb-6 lg:mb-0">
-            <h2 className="text-xl font-bold text-white mb-2">E-Learning</h2>
-            <p className="text-sm">
+          <div className="w-full text-center lg:text-left lg:w-1/3 mb-6 lg:mb-0">
+            <h2 className={`text-xl font-bold mb-2 ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+              E-Learning
+            </h2>
+            <p className="text-md">
               Your one-stop platform for learning and teaching. Join us to
               explore knowledge and grow your skills!
             </p>
@@ -17,78 +27,56 @@ const Footer = () => {
 
           {/* Center Section */}
           <div className="w-full lg:w-1/3 text-center mb-6 lg:mb-0">
-            <h3 className="text-lg font-bold text-white mb-2">Quick Links</h3>
+            <h3 className={`text-lg font-bold mb-2 ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="/"
-                  className="hover:text-blue-300 transition-colors"
-                >
+                <a href="/" className="hover:text-blue-500 transition-colors">
                   Home
                 </a>
               </li>
               <li>
-                <a
-                  href="/classes"
-                  className="hover:text-blue-300 transition-colors"
-                >
+                <a href="/classes" className="hover:text-blue-500 transition-colors">
                   All Classes
                 </a>
               </li>
               <li>
-                <a
-                  href="/teach"
-                  className="hover:text-blue-300 transition-colors"
-                >
+                <a href="/teach" className="hover:text-blue-500 transition-colors">
                   Teach
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Right Section */}
+          {/* Right Section - Social Media */}
           <div className="w-full lg:w-1/3 flex justify-center lg:justify-end gap-4">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors bg-gradient-to-r from-blue-500 to-blue-700 p-2 rounded-full"
-            >
-              <FaFacebook size={24} />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors bg-gradient-to-r from-blue-400 to-blue-600 p-2 rounded-full"
-            >
-              <FaTwitter size={24} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors bg-gradient-to-r from-blue-600 to-blue-800 p-2 rounded-full"
-            >
-              <FaLinkedin size={24} />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors bg-gradient-to-r from-pink-500 to-pink-700 p-2 rounded-full"
-            >
-              <FaInstagram size={24} />
-            </a>
+            {[
+              { href: "https://www.facebook.com/mdakashkhan444/", icon: <FaFacebook />, bg: "bg-blue-600" },
+              { href: "https://github.com/RizbiAhmmad", icon: <FaGithub />, bg: "bg-gray-800" },
+              { href: "https://www.linkedin.com/in/rizbi2001/", icon: <FaLinkedin />, bg: "bg-blue-700" },
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : `${social.bg} text-white hover:opacity-80`
+                }`}
+              >
+                {social.icon}
+              </a>
+            ))}
           </div>
         </div>
 
-        
-        <div className="border-t border-gray-700 my-6"></div>
+        {/* Divider */}
+        <div className={`border-t my-6 ${isDarkMode ? "border-gray-700" : "border-gray-300"}`}></div>
 
-        
+        {/* Bottom Section */}
         <div className="text-center">
-          <p className="text-sm text-gray-300">
+          <p className="text-sm">
             &copy; {new Date().getFullYear()} E-Learning. All rights reserved.
           </p>
         </div>

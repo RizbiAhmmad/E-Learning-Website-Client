@@ -10,7 +10,7 @@ const CallToAction = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className={`mt-8 py-12 transition-all duration-300 ${
+      className={`px-8 py-12 transition-all duration-300 ${
         isDarkMode ? "bg-black text-white" : "bg-gray-100 text-gray-900"
       }`}
     >

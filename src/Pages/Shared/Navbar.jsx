@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`px-8 py-4 sticky top-0 z-10 shadow-md ${isDarkMode ? "bg-black" : "bg-cyan-950"} text-white`}>
+    <nav className={`px-8 py-4 sticky top-0 z-10 shadow-md ${isDarkMode ? "bg-[#0B0716]" : "bg-cyan-950"} text-white`}>
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center gap-4 cursor-pointer">
           <img className="h-8 w-8 object-cover" src="https://img.freepik.com/premium-vector/e-learning-concept_24911-16717.jpg" alt="Logo" />

@@ -64,7 +64,7 @@ const Teach = () => {
 
   return (
     <div
-      className={`max-w-4xl mx-auto mt-10 p-8 rounded-lg shadow-md transition-all duration-300 ${
+      className={`max-w-4xl mx-auto mb-10 mt-10 p-8 rounded-lg shadow-md transition-all duration-300 ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
