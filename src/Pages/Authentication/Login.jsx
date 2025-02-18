@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
@@ -9,102 +9,72 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
-  console.log('state in the location', location.state);
-
 
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(email, password);
+    
     signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-
       Swal.fire({
         title: "User Login Successfully",
-        showClass: {
-          popup: `
-            animate__animated
-            animate__fadeInUp
-            animate__faster
-          `,
-        },
-        hideClass: {
-          popup: `
-            animate__animated
-            animate__fadeOutDown
-            animate__faster
-          `,
-        },
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      navigate(from, {replace: true});
+      navigate(from, { replace: true });
     });
   };
 
-
   return (
-    <div>
+    <div className="min-h-screen flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-vector/background-abstract-realistic-technology-particle_23-2148431264.jpg?semt=ais_hybrid')" }}>
       <Helmet>
         <title>E-Learning | Login</title>
       </Helmet>
-      <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content ">
-         
-          <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-            <form onSubmit={handleLogin} className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
-               
-              </div>
-             
-              <div className="form-control mt-6">
-                {/* <button >Login</button> */}
-                <input
-                  className="btn btn-primary"
-                  type="submit"
-                  value="Login"
-                />
-              </div>
-            </form>
-           <div className="text-center mb-4">
-           <p className="">
-                New here?{" "}
-                <Link to="/signup" className="text-blue-500">
-                  Create an account
-                </Link>
 
-            </p>
-            <div className="divider"></div>
-            
-            <h2>Login with Google <SocialLogin></SocialLogin></h2>
-            
-           </div>
+      <div className="bg-white/20 backdrop-blur-lg shadow-xl rounded-xl p-8 max-w-md w-full">
+        <h2 className="text-3xl font-bold text-center text-white mb-6">Welcome Back</h2>
+
+        <form onSubmit={handleLogin} className="space-y-4">
+          {/* Email */}
+          <div>
+            <label className="block text-white font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-2 mt-1 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
           </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-white font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              className="w-full px-4 py-2 mt-1 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+              required
+            />
+          </div>
+
+          {/* Login Button */}
+          <div className="mt-4">
+            <button type="submit" className="w-full py-2 text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 rounded-lg shadow-lg transition-all duration-300 cursor-pointer">
+              Login
+            </button>
+          </div>
+        </form>
+
+        {/* Social Login and Signup Link */}
+        <div className="text-center text-white mt-4">
+          <p>New here? <Link to="/signup" className="text-blue-300 hover:underline">Create an account</Link></p>
+          <div className="divider my-3"></div>
+          <SocialLogin />
         </div>
       </div>
     </div>

@@ -102,7 +102,7 @@ const LearningPathPage = () => {
         >
           <h3 className="text-xl md:text-2xl font-bold text-center mb-4">{selectedPath.name} Roadmap</h3>
 
-          <div className="space-y-3 md:space-y-4">
+          <div className=" space-y-3 md:space-y-4">
             {roadmap.map((item, index) => (
               <motion.div 
                 key={index} 
@@ -112,7 +112,7 @@ const LearningPathPage = () => {
               >
                 <button
                   onClick={() => handleMilestoneCompletion(index)}
-                  className={`w-full py-2 md:py-3 px-3 md:px-4 rounded-lg text-left transition-all duration-300 font-medium shadow-md text-sm md:text-base
+                  className={`w-full py-2 md:py-3 px-3 md:px-4 rounded-lg text-center transition-all duration-300 font-medium shadow-md text-sm md:text-base
                     ${item.completed ? "bg-green-500 text-white" 
                     : isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" 
                     : "bg-gray-300 hover:bg-gray-400"}`}

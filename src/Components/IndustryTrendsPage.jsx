@@ -19,7 +19,7 @@ const IndustryTrendsPage = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen px-6 py-12 transition-all duration-300 ${
+    <div className={`min-h-screen px-8 py-4 transition-all duration-300 ${
       isDarkMode 
         ? "bg-black text-white" 
         : "bg-gray-100 text-black"
