@@ -75,7 +75,7 @@ const Partners = () => {
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0 },
               }}
-              className="bg-white rounded-lg shadow-lg p-6 text-center transition-all duration-500 hover:shadow-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white"
+              className="bg-white rounded-lg shadow-lg p-8 text-center transition-all duration-500 hover:shadow-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white"
             >
               <motion.img
                 src={partner.logo}
