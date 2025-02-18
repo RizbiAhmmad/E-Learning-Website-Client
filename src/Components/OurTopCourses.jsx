@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../providers/ThemeProvider"; 
+import Loading from "./Loading";
 
 const OurTopCourses = () => {
+  const { isDarkMode } = useContext(ThemeContext); 
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,10 +15,7 @@ const OurTopCourses = () => {
         const response = await fetch("https://e-learning-server-theta.vercel.app/classes");
         const data = await response.json();
 
-        // Filter only approved courses
         const approvedCourses = data.filter((course) => course.status === "approved");
-
-        // Display the latest 6 approved courses
         setCourses(approvedCourses.slice(0, 6));
         setLoading(false);
       } catch (error) {
@@ -28,21 +28,16 @@ const OurTopCourses = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <motion.div
-          className="w-16 h-16 border-4 border-dashed border-blue-500 rounded-full animate-spin"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
-        ></motion.div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
-    <div className="w-full bg-gray-100 px-8 py-12">
-      <h1 className="text-4xl font-bold text-center mb-10 text-gray-800">
+    <div
+      className={`w-full px-8 py-12 transition-all duration-300 ${
+        isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      }`}
+    >
+      <h1 className={`text-4xl font-bold text-center mb-10 ${isDarkMode ? "text-white" : "text-gray-800"}`}>
         🌟 Our Top Courses
       </h1>
 
@@ -50,7 +45,11 @@ const OurTopCourses = () => {
         {courses.map((course, index) => (
           <motion.div
             key={course._id}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
+            className={`rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ${
+              isDarkMode
+                ? "bg-gray-900 text-white"
+                : "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -63,24 +62,28 @@ const OurTopCourses = () => {
             />
             <div className="p-6">
               <h2 className="text-2xl font-bold">{course.title || "Untitled Course"}</h2>
-              <p className="text-gray-200 text-sm mt-2 line-clamp-2">
+              <p className="text-gray-300 text-sm mt-2 line-clamp-2">
                 {course.description || "No description available."}
               </p>
-              <p className="text-white mt-3">
+              <p className="mt-3">
                 <strong>👨‍🏫 Teacher:</strong> {course.teacherName || "Unknown"}
               </p>
-              <p className="text-white">
+              <p>
                 <strong>💰 Price: </strong> ${course.price || "N/A"}
               </p>
 
-             <Link to={`/classes`}>
-             <motion.button
-                className="w-full mt-5 py-3 rounded-lg bg-white text-blue-600 font-semibold hover:bg-gray-200 transition duration-300"
-                whileTap={{ scale: 0.95 }}
-              >
-                See More 🚀
-              </motion.button>
-             </Link>
+              <Link to={`/classes`}>
+                <motion.button
+                  className={`w-full mt-5 py-3 rounded-lg font-semibold transition duration-300 ${
+                    isDarkMode
+                      ? "bg-white text-gray-900 hover:bg-gray-300"
+                      : "bg-white text-blue-600 hover:bg-gray-200"
+                  }`}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  See More 🚀
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         ))}
