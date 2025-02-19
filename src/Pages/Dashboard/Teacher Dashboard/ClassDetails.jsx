@@ -81,7 +81,7 @@ const [payments, setPayments] = useState([]);
         Swal.fire("Error!", "Failed to add the assignment.", "error");
       });
   };
-  console.log(payments);
+  // console.log(payments);
 
   return (
     <div className="p-6">

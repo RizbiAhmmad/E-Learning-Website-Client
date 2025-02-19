@@ -52,14 +52,14 @@ const MyClasses = () => {
     });
   };
 
-  console.log(classes);
+  // console.log(classes);
   const handleUpdate = (classId) => {
     navigate(`/dashboard/update-class/${classId}`);
   };
 
   const handleDetails = (classId) => {
     navigate(`/dashboard/my-class/${classId}`);
-    console.log(classId);
+    // console.log(classId);
   };
 
   return (

@@ -106,6 +106,11 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/dashboard/teacherStats" className="flex py-2 space-x-3 items-center">
+                  <IoIosStats /> <span>Stats</span>
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/dashboard/add-class" className="flex py-2 space-x-3 items-center">
                     <FaChalkboardTeacher /> <span>Add Class</span>
                   </NavLink>
@@ -128,6 +133,11 @@ const Dashboard = () => {
                 <li>
                   <NavLink to="/" className="flex py-2 space-x-3 items-center">
                     <FaHome></FaHome> <span>Home</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/studentStats" className="flex py-2 space-x-3 items-center">
+                  <IoIosStats /> <span>Stats</span>
                   </NavLink>
                 </li>
                 <li>

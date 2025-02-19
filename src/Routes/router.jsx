@@ -24,6 +24,8 @@ import MyEnrollClass from "../Pages/Dashboard/Student/MyEnrollClass";
 import ErrorPages from "../Components/ErrorPages";
 import MyEnrollClassDetails from "../Pages/Dashboard/Student/MyEnrollClassDetails";
 import AdminStats from "../Pages/Dashboard/Admin/AdminStats";
+import StudentStats from "../Pages/Dashboard/Student/StudentStats";
+import TeacherStats from "../Pages/Dashboard/Teacher Dashboard/TeacherStats";
 
 export  const router = createBrowserRouter([
     {
@@ -79,6 +81,14 @@ export  const router = createBrowserRouter([
         {
           path: 'stats',
           element: <AdminStats></AdminStats>
+        },
+        {
+          path: 'studentStats',
+          element: <StudentStats></StudentStats>
+        },
+        {
+          path: 'teacherStats',
+          element: <TeacherStats></TeacherStats>
         },
         {
           path: 'profile',
