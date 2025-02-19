@@ -6,6 +6,7 @@ import {
   FaHome,
   FaUsers,
 } from "react-icons/fa";
+import { IoIosStats } from "react-icons/io";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
@@ -54,7 +55,7 @@ const Dashboard = () => {
           </button>
         </div>
 
-      <div className="flex h-screen">
+      <div className="flex min-h-screen">
         {/* Dashboard side bar */}
         <div className={`${
             isSidebarOpen ? "w-64" : "w-0 md:w-64"
@@ -65,6 +66,11 @@ const Dashboard = () => {
                 <li >
                   <NavLink to="/" className="flex py-2 space-x-3 items-center">
                     <FaHome></FaHome> <span>Home</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/stats" className="flex py-2 space-x-3 items-center">
+                  <IoIosStats /> <span>Stats</span>
                   </NavLink>
                 </li>
                 <li>

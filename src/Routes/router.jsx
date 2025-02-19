@@ -23,6 +23,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import MyEnrollClass from "../Pages/Dashboard/Student/MyEnrollClass";
 import ErrorPages from "../Components/ErrorPages";
 import MyEnrollClassDetails from "../Pages/Dashboard/Student/MyEnrollClassDetails";
+import AdminStats from "../Pages/Dashboard/Admin/AdminStats";
 
 export  const router = createBrowserRouter([
     {
@@ -74,6 +75,10 @@ export  const router = createBrowserRouter([
         {
           path: 'requests',
           element: <TeachApplications></TeachApplications>
+        },
+        {
+          path: 'stats',
+          element: <AdminStats></AdminStats>
         },
         {
           path: 'profile',
