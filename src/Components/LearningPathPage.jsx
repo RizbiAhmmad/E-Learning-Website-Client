@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { ThemeContext } from "../providers/ThemeProvider";
+import { FaCheckCircle, FaCircle } from "react-icons/fa";
 
 const LearningPathPage = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -38,6 +39,12 @@ const LearningPathPage = () => {
     ],
   };
 
+  // Set "Web Development" as the default selected path on component mount
+  useEffect(() => {
+    const defaultPath = learningPaths.find(path => path.name === "Web Development");
+    setSelectedPath(defaultPath);
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   useEffect(() => {
     if (selectedPath) {
       setRoadmap(roadmapData[selectedPath.id]);
@@ -54,38 +61,49 @@ const LearningPathPage = () => {
     newRoadmap[index].completed = !newRoadmap[index].completed;
     setRoadmap(newRoadmap);
 
-    const completedMilestones = newRoadmap.filter((milestone) => milestone.completed).length;
+    const completedMilestones = newRoadmap.filter(
+      (milestone) => milestone.completed
+    ).length;
     setProgress(Math.floor((completedMilestones / newRoadmap.length) * 100));
   };
 
   return (
-    <div className={`min-h-screen p-4 md:p-8 transition-all duration-300 ${isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"}`}>
-      <motion.h2 
-        className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-8"
+    <div
+      className={`min-h-screen p-4 md:p-8 transition-all duration-300 ${
+        isDarkMode
+          ? "bg-gradient-to-b from-black to-gray-900 text-white"
+          : "bg-gradient-to-b from-gray-100 to-gray-200 text-black"
+      }`}
+    >
+      <motion.h2
+        className={`text-4xl font-bold text-center mb-10 ${isDarkMode ? "text-white" : "text-gray-800"}`}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.8 }}
       >
         Choose Your Learning Path
       </motion.h2>
 
       {/* Learning Path Selection */}
-      <motion.div 
-        className="flex flex-wrap justify-center gap-4 md:gap-6 mb-6 md:mb-8"
+      <motion.div
+        className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       >
         {learningPaths.map((path) => (
           <motion.button
             key={path.id}
             onClick={() => handlePathSelect(path)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.9 }}
-            className={`px-6 md:px-8 py-2 md:py-3 rounded-lg border-2 transition-all duration-300 font-semibold text-sm md:text-base
-              ${selectedPath?.id === path.id ? "bg-purple-500 text-white" 
-              : isDarkMode ? "bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
-              : "bg-white border-gray-300 hover:bg-gray-200"}`}
+            whileHover={{ scale: 1.1, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            className={`px-6 md:px-10 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg shadow-lg transition-all duration-300 bg-gradient-to-r ${
+              selectedPath?.id === path.id
+                ? "from-purple-500 to-cyan-400 text-white"
+                : isDarkMode
+                ? "from-gray-800 to-gray-700 text-white border border-gray-600 hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+                : "from-white to-gray-100 text-black border border-gray-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+            }`}
           >
             {path.name}
           </motion.button>
@@ -94,45 +112,84 @@ const LearningPathPage = () => {
 
       {/* Roadmap Section */}
       {selectedPath && (
-        <motion.div 
-          className="mt-6 max-w-full md:max-w-3xl mx-auto bg-opacity-90 p-4 md:p-8 rounded-xl shadow-lg transition-all duration-300"
+        <motion.div
+          className={`mt-8 max-w-full md:max-w-4xl mx-auto p-6 md:p-10 rounded-2xl shadow-2xl transition-all duration-300 ${
+            isDarkMode
+              ? "bg-gray-900/80 backdrop-blur-md border border-gray-700"
+              : "bg-white/90 backdrop-blur-sm border border-gray-200"
+          }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
-          <h3 className="text-xl md:text-2xl font-bold text-center mb-4">{selectedPath.name} Roadmap</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-300">
+            {selectedPath.name} Roadmap
+          </h3>
 
-          <div className=" space-y-3 md:space-y-4">
+          <div className="space-y-4 md:space-y-6">
             {roadmap.map((item, index) => (
-              <motion.div 
-                key={index} 
-                className="flex items-center gap-3 md:gap-4 p-2 md:p-3 rounded-lg"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
+              <motion.div
+                key={index}
+                className={`flex items-center gap-4 p-4 md:p-5 rounded-xl shadow-md transition-all duration-300 ${
+                  item.completed
+                    ? "bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-400"
+                    : isDarkMode
+                    ? "bg-gray-800 border border-gray-700"
+                    : "bg-white border border-gray-200"
+                } hover:shadow-[0_0_15px_rgba(168,85,247,0.4)]`}
+                whileHover={{ scale: 1.03, y: -2 }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <button
+                {/* Status Icon */}
+                <motion.button
                   onClick={() => handleMilestoneCompletion(index)}
-                  className={`w-full py-2 md:py-3 px-3 md:px-4 rounded-lg text-center transition-all duration-300 font-medium shadow-md text-sm md:text-base
-                    ${item.completed ? "bg-green-500 text-white" 
-                    : isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" 
-                    : "bg-gray-300 hover:bg-gray-400"}`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="text-xl md:text-2xl"
                 >
-                  {item.milestone}
-                </button>
+                  {item.completed ? (
+                    <FaCheckCircle className="text-green-400" />
+                  ) : (
+                    <FaCircle className={isDarkMode ? "text-gray-400" : "text-gray-500"} />
+                  )}
+                </motion.button>
+
+                {/* Milestone Text */}
+                <div className="flex-1">
+                  <h4
+                    className={`text-base md:text-lg font-semibold ${
+                      item.completed
+                        ? "text-green-400"
+                        : isDarkMode
+                        ? "text-white"
+                        : "text-black"
+                    }`}
+                  >
+                    {item.milestone}
+                  </h4>
+                </div>
               </motion.div>
             ))}
           </div>
 
           {/* Progress Bar */}
-          <div className="mt-4 md:mt-6">
-            <div className="text-lg md:text-xl font-semibold text-center">Progress: {progress}%</div>
-            <motion.div 
-              className={`w-full h-2 md:h-3 mt-2 rounded-lg overflow-hidden ${isDarkMode ? "bg-gray-700" : "bg-gray-300"}`}
+          <div className="mt-6 md:mt-8">
+            <div className="text-lg md:text-xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-300">
+              Progress: {progress}%
+            </div>
+            <motion.div
+              className={`w-full h-3 md:h-4 mt-3 rounded-full overflow-hidden shadow-inner ${
+                isDarkMode ? "bg-gray-700" : "bg-gray-300"
+              }`}
               initial={{ width: "0%" }}
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <div className="bg-blue-500 h-2 md:h-3 rounded-lg"></div>
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-purple-500 to-cyan-400"
+              ></div>
             </motion.div>
           </div>
         </motion.div>
